@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Recipe List{% endblock %}
+
+{% block content %}
+<div class="recipe-container">
+    {% for recipe in recipes %}
+    <div class="card" data-id="{{ recipe.id }}">
+        <!-- Assuming recipe.image_url is just the image file name -->
+        <img style="max-width: 200px; max-height: 200px" src="{{ url_for('static', filename='images/' + recipe.image_url) }}" alt="{{ recipe.title }}">
+
+        <h2>{{ recipe.name }}</h2>
+        <p>{{ recipe.title }}</p>
+        <p>Time required: {{ recipe.time_required }} mins</p>
+        <p>Ingredients: {{ recipe.ingredients }}</p>
+
+        <!-- Details and Edit buttons -->
+        <a href="{{ url_for('view_recipe', id=recipe.id) }}">View Details</a>
+        <a href="{{ url_for('edit_recipe', id=recipe.id) }}">Edit</a>
+
+        <!-- Delete button form -->
+        <form action="{{ url_for('delete_recipe', id=recipe.id) }}" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

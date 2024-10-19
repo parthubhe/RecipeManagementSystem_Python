@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ recipe.name }}{% endblock %}
+
+{% block content %}
+<div id="recipeDetail" data-id="{{ recipe.id }}">
+    <img style="max-width: 200px; max-height: 200px" src="{{ url_for('static', filename='images/' + recipe.image_url) }}" alt="{{ recipe.title }}">
+    <h2>{{ recipe.name }}</h2>
+    <p>{{ recipe.title }}</p>
+    <p>Time required: {{ recipe.time_required }} mins</p>
+    <p>Ingredients: {{ recipe.ingredients }}</p>
+    <p>Instructions: {{ recipe.instructions }}</p>
+</div>
+
+<!-- Navigation buttons -->
+<div class="navigation">
+    <button id="prevBtn">Previous Recipe</button>
+    <button id="nextBtn">Next Recipe</button>
+</div>
+{% endblock %}
